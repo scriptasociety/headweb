@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.C.R.I.P.T.A.</title>
+</head>
+<style>
+    body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .header_container {
+        border: 2px solid black;
+        text-align: center;
+        width: auto;
+        height: fit-content;
+        background-color: rgb(178, 178, 255);
+    }
+    #option {
+        text-align: center;
+        height: 50px;
+        width: 200px;
+    }
+    #emb {
+        width: 99%;
+        height: 500px;
+        border: 2px solid black;
+    }
+    .foot {
+        text-align: center;
+        color: white;
+        width: auto;
+        height: 200px;
+        border: 2px solid black;
+        background-color: gray;
+    }
+    .foot a {
+        color: white;
+    }
+</style>
+<body>
+    <div class="header_container">
+        <h1>S.C.R.I.P.T.A.</h1>
+        <h4>Society for Creative Reflection Imagination and Prose Through Art </h5>
+        <select name="" id="option">
+            <option value="announcement">ANNOUNCEMENTS</option>
+            <option value="info">INFORMATION</option>
+            <option value="data">DATA</option> <br><br>
+        </select>
+    </div>
+    <embed id="emb" src="announcements.html" type="">
+        <footer class="foot">
+            <h3>Facebook Profile: <a href="https://www.facebook.com/scriptasociety">Society for Creative Reflection Imagination and Prose Through Art </a></h3>
+            <h3>Facebook Group Page: <a href="https://www.facebook.com/groups/scriptasociety/">SCRIPTA SOCIETY</a></h3>
+        </footer>
+</body>
+<script>
+    const opt = document.getElementById('option');
+    const emv = document.getElementById('emb');
+    opt.addEventListener("change", () => {
+        if(opt.value === 'announcement') {
+            emv.src = 'announcements.html';
+        }
+        else if(opt.value === 'info') {
+            emv.src = 'info.html';
+        }
+        else if(opt.value === 'data') {
+            emv.src = 'data.html';
+        }
+    })
+</script>
+</html>

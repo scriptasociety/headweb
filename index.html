@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.C.R.I.P.T.A.</title>
+    <link rel="shortcut icon" href="id_image/download.png" type="image/x-icon">
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .container {
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 50px;
+        text-align: center;
+        background-color: #c8fdff;
+        width: 500px;
+        height: 200px;
+    }
+    .card {
+        border: 2px solid black;
+        border-radius: 50px;
+        background-color: rgb(160, 255, 255);
+        width: max-content;
+        height: 70px;
+    }
+</style>
+<body>
+    
+    <div class="container">
+        <h2>WELCOME TO S.C.R.I.P.T.A. SOCIETY</h2>
+        <br>
+            <button class="card" onclick="idapproval();" >ENTER WRITER'S LICENSE</button>
+        <input hidden type="file" id="imageInput" accept="image/*">
+    </div>
+    
+
+    <!-- Preload all reference images (hidden) -->
+    <img class="reference" src="id_image/WRITER_LICENSE.png" style="display:none;">
+    <img class="reference" src="id_image/WRITER_LICENSE2.png" style="display:none;">
+    <!-- ... more images -->    
+</body>
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const referenceImages = document.querySelectorAll('.reference');
+
+    function idapproval() {
+        imageInput.click();
+    }
+    
+    function compareImages(img1, img2) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+  
+      const width = img1.width;
+      const height = img1.height;
+      if (img2.width !== width || img2.height !== height) return false;
+  
+      canvas.width = width;
+      canvas.height = height;
+  
+      ctx.drawImage(img1, 0, 0);
+      const data1 = ctx.getImageData(0, 0, width, height).data;
+  
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(img2, 0, 0);
+      const data2 = ctx.getImageData(0, 0, width, height).data;
+  
+      for (let i = 0; i < data1.length; i++) {
+        if (data1[i] !== data2[i]) return false;
+      }
+      return true;
+    }
+  
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+  
+      const uploadedImg = new Image();
+      const reader = new FileReader();
+  
+      reader.onload = function (e) {
+        uploadedImg.src = e.target.result;
+      };
+  
+      uploadedImg.onload = function () {
+        let matchFound = false;
+  
+        referenceImages.forEach(refImg => {
+          if (compareImages(uploadedImg, refImg)) {
+            matchFound = true;
+            alert("WELCOME, WRITER.");
+            window.location.href = 'strings/mainpage.html';
+            // Execute your command here
+          }
+        });
+  
+        if (!matchFound) {
+          alert("No match found.");
+        }
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  </script>
+  
+</html>
